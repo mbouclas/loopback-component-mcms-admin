@@ -1,0 +1,47 @@
+{
+  "name": "loopback-component-mcms-admin",
+  "version": "0.0.1",
+  "description": "Admin interface for Loopback based Mcms",
+  "main": "index.js",
+  "keywords": [
+    "loopback",
+    "MCMS",
+    "Admin",
+    "CMS",
+    "component"
+  ],
+  "author": "Michael Bouclas <mbouclas@gmail.com> (http://net-tomorrow.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-material": "^1.0.6",
+    "angular-messages": "^1.5.0",
+    "angular-resource": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-sanitize": "^1.5.0",
+    "angular-toasty": "^1.0.5",
+    "bluebird": "^3.3.4",
+    "fs-extra": "^0.26.5",
+    "lodash": "^4.6.1",
+    "moment": "^2.12.0",
+    "ng-file-upload": "^12.0.1",
+    "nunjucks": "^2.4.0",
+    "slug": "^0.9.1",
+    "sprintf": "^0.1.5",
+    "wrench": "^1.5.8"
+  },
+  "scripts": {
+    "watch": "watchify ./public/app/index.js -o ./public/assets/js/components.js -v",
+    "watch-app": "watchify ./public/app/app.js -o ./public/assets/js/app.js -v",
+    "create-loopback": "cd ../../server && lb-ng -m mcms.lbService server.js ../node_modules/loopback-component-mcms-admin/public/assets/js/lbService.js",
+    "minify-app": "uglifyjs public/assets/js/app.js --compress --mangle -o public/assets/js/app.min.js"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/mbouclas/loopback-component-mcms-admin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mbouclas/loopback-component-mcms-admin.git"
+  }
+}

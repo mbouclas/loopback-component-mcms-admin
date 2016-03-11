@@ -1,0 +1,79 @@
+{
+  "name": "Page",
+  "plural": "pages",
+  "base": "PersistedModel",
+  "dataSource": "mongodb",
+  "public": true,
+  "settings": {
+    "mongodb": {
+      "allowExtendedOperators": true
+    }
+  },
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "permalink": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string"
+    },
+    "descriptionLong": {
+      "type": "string"
+    },
+    "active": {
+      "type": "boolean"
+    },
+    "thumb": {
+      "type": "object"
+    },
+    "images": {
+      "type": [
+        "object"
+      ]
+    },
+    "categoryId": {
+      "type": "object"
+    },
+    "settings": {
+      "type": "object"
+    },
+    "created_at": {
+      "type": "date"
+    },
+    "updated_at": {
+      "type": "date"
+    },
+    "uid": {
+      "type": "object"
+    },
+    "translations": {
+      "type": [
+        "object"
+      ]
+    },
+    "related": {
+      "type": [
+        "object"
+      ]
+    },
+    "preferences": {
+      "type": "object"
+    }
+  },
+  "mixins" : {
+    "Timestamp": {
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

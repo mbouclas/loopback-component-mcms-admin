@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" ng-app="mcms">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ siteName }}</title>
+    <base href="/">
+
+    <link rel="stylesheet" href="/assets/css/angular-material.min.css">
+    <link rel="stylesheet" href="/assets/css/styles.css"/>
+    {% for style in files.css %}
+        <link rel="stylesheet" href="{{ style }}"/>
+    {% endfor %}
+</head>
+<body>
+<div ng-view=""></div>
+<script src="/assets/js/components.js"></script>
+<script src="/assets/js/app.js"></script>
+
+{% for script in files.scripts %}
+    <script src="{{ script }}"></script>
+{% endfor %}
+</body>
+</html>

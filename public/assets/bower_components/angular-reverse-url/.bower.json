@@ -1,0 +1,39 @@
+{
+  "name": "angular-reverse-url",
+  "version": "2.3.1",
+  "homepage": "https://github.com/incuna/angular-reverse-url",
+  "authors": [
+    "Perry Roper <perryroper@gmail.com>"
+  ],
+  "main": "src/reverse_url.js",
+  "keywords": [
+    "angularjs",
+    "reverse",
+    "urls"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2",
+    "angular-route": "~1.2",
+    "lodash": "~2.4"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.22"
+  },
+  "_release": "2.3.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.3.1",
+    "commit": "867ab623f4e38bbd9a08e91347d8052ac3c189a4"
+  },
+  "_source": "git://github.com/incuna/angular-reverse-url.git",
+  "_target": "~2.3.1",
+  "_originalSource": "angular-reverse-url"
+}

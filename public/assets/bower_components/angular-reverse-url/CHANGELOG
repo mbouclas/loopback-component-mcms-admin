@@ -1,0 +1,34 @@
+# 2.3.1
+
+* Fix problems in the bower.json file.
+
+# 2.3.0
+
+* Only prefix the route with `#` when html5 mode is disabled.
+
+# 2.2.0
+
+* Return the empty string if no route matches.
+
+# 2.1.0
+
+* Allow routes to be resolved by the `name` property.
+
+# 2.0.2
+
+* Improved dependency matching in `bower.json` to reduce conflicts.
+
+# 2.0.1
+
+* Fixes an issue with matching routes which require params, when we have none.
+
+# 2.0.0
+
+* Added lodash as a dependency.
+* Memoized the reverseUrl filter. Massive performance benefits from this.
+  Every $digest cycle causes all URLs to be reversed, even if they haven't
+  changed.
+
+# 1.0.0
+
+* Initial release.

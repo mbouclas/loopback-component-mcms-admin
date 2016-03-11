@@ -1,0 +1,9 @@
+{
+  "name": "loopback-component-mcms-admin",
+  "version": "0.0.1",
+  "description": "Admin interface for Loopback based Mcms",
+  "license": "MIT",
+  "dependencies": {
+    "angular-reverse-url": "~2.3.1"
+  }
+}

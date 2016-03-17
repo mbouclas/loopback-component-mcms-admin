@@ -1,0 +1,14 @@
+<img ng-src="{{ thumbModel || '/img/no-image.png' }}" style="width: 100% \9;" />
+
+<div ng-show="f">
+    <md-progress-linear  md-mode="determinate" value="{{f.progress || 0}}"></md-progress-linear>
+    {{f.progress || 0}}%
+</div>
+
+<upload-box
+        ng-model="model" config="uploadConfig"
+        callback="onUploadDone(file,response)"
+        on-progress="onProgress(file,progress)"
+        auto-start="true" progress-bar="true"
+        accept-select="{{ uploadOptions.acceptSelect }}"
+        accept="{{ uploadOptions.accept }}"></upload-box>

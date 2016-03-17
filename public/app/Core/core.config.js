@@ -8,7 +8,9 @@
 
     var config = {
         apiUrl : '/api/',
+        prefixUrl : '/manage',
         templatesDir : appUrl + '/templates/',
+        imageUploadUrl: '/manage/uploadImage/',
         imageBasePath: assetsUrl + 'img',
         appUrl : appUrl,
         componentsUrl : componentsUrl,

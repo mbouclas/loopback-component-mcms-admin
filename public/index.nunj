@@ -4,15 +4,49 @@
     <meta charset="UTF-8">
     <title>{{ siteName }}</title>
     <base href="/">
-
+    <meta name="viewport" content="initial-scale=1" />
+    <link rel="stylesheet" href="/assets/js/redactor/redactor.css">
     <link rel="stylesheet" href="/assets/css/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="/assets/css/styles.css"/>
     {% for style in files.css %}
         <link rel="stylesheet" href="{{ style }}"/>
     {% endfor %}
 </head>
-<body>
-<div ng-view=""></div>
+<body layout="row">
+{% raw %}
+
+<div layout="row" flex="">
+    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')"
+                md-disable-backdrop="" md-whiteframe="4">
+
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">Sidenav Left</h1>
+        </md-toolbar>
+
+        <md-content flex role="navigation">
+            <side-bar-nav></side-bar-nav>
+        </md-content>
+
+    </md-sidenav>
+    <md-content flex="">
+        <header-component></header-component>
+        <div layout="column" layout-fill="" layout-align="top">
+
+
+            <div ng-view="" flex></div>
+
+        </div>
+        <footer-component></footer-component>
+        <div flex=""></div>
+    </md-content>
+</div>
+{% endraw %}
+
+<script>
+    var Injectables = {{ files.injectables |safe }};
+</script>
 <script src="/assets/js/components.js"></script>
 <script src="/assets/js/app.js"></script>
 

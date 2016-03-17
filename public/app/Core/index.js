@@ -3,8 +3,18 @@
     /*
      * Module used for core components like data services, lodash and common directives
      */
-    angular.module('mcms.core', []);
+    angular.module('mcms.core', [])
+        .run(run);
 
+    run.$inject = ['app.serviceProvider','mcms.menuService'];
+
+    function run(App,Menu) {
+        Menu.addMenu(Menu.newItem({
+            id : 'home',
+            title : 'Home',
+            permalink : ''
+        }));
+    }
 })();
 
 require('./services');

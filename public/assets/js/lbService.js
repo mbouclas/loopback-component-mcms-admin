@@ -6604,11 +6604,13 @@ module.factory(
          *
          * @description
          *
-         * Similar to /get but with related SKU's
+         * Similar to /get but with the full workout in the background
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `query` – `{object=}` - 
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -6636,11 +6638,13 @@ module.factory(
          *
          * @description
          *
-         * Similar to /findOne but with related SKU's
+         * Similar to /findOne but with full workout
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `filter` – `{string=}` - 
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.

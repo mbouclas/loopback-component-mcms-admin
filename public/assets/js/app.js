@@ -18766,6 +18766,89 @@
 }));
 },{}],3:[function(require,module,exports){
 (function() {
+    angular.module('mcms.components')
+        .directive('footerComponent', footerComponent);
+
+    footerComponent.$inject = ['configuration'];
+    footerController.$inject = [];
+
+    function footerComponent(Config){
+
+        return {
+            require : 'footerComponent',
+            templateUrl: Config.templatesDir +"Components/footer.component.html",
+            controller: footerController,
+            controllerAs : 'VM',
+            scope: {},
+            restrict : 'E',
+            link : function(scope, element, attrs, controllers){
+            }
+        };
+    }
+
+    function footerController(){
+        var vm = this;
+
+
+    }
+})();
+
+},{}],4:[function(require,module,exports){
+(function() {
+    angular.module('mcms.components')
+        .directive('goTo', goTo);
+
+    goTo.$inject = ['$window'];
+
+
+    function goTo($window){
+
+        return {
+
+            restrict : 'A',
+            link : function(scope, element, attrs, controllers){
+
+                element.on('click',function () {
+                    $window.location.href = attrs.goTo;
+                });
+
+            }
+        };
+    }
+
+})();
+
+},{}],5:[function(require,module,exports){
+(function() {
+    angular.module('mcms.components')
+        .directive('headerComponent', headerComponent);
+
+    headerComponent.$inject = ['configuration'];
+    headerComponentController.$inject = ['mcms.menuService'];
+
+    function headerComponent(Config){
+
+        return {
+            require : 'headerComponent',
+            templateUrl: Config.templatesDir + "Components/header.component.html",
+            controller: headerComponentController,
+            controllerAs : 'VM',
+            scope: {},
+            restrict : 'E',
+            link : function(scope, element, attrs, controllers){
+            }
+        };
+    }
+
+    function headerComponentController(Menu){
+        var vm = this;
+        vm.Menu = Menu.get();
+
+    }
+})();
+
+},{}],6:[function(require,module,exports){
+(function() {
   'use strict';
 
   angular.module('mcms.components', []);
@@ -18774,10 +18857,16 @@
 
 require('./modal');
 require('./scrollTo.directive');
+require('./header');
+require('./footer');
+require('./sideBarNav');
+require('./goTo');
+require('./uploadBox.directive');
+require('./thumbUploadBox.component');
 
 
 
-},{"./modal":4,"./scrollTo.directive":8}],4:[function(require,module,exports){
+},{"./footer":3,"./goTo":4,"./header":5,"./modal":7,"./scrollTo.directive":11,"./sideBarNav":12,"./thumbUploadBox.component":13,"./uploadBox.directive":14}],7:[function(require,module,exports){
 (function() {
   angular.module('mcms.components')
     .directive('modal', modal);
@@ -18887,7 +18976,7 @@ require('./modal.body.component');
 require('./modal.footer.component');
 require('./modal.header.component');
 
-},{"./modal.body.component":5,"./modal.footer.component":6,"./modal.header.component":7}],5:[function(require,module,exports){
+},{"./modal.body.component":8,"./modal.footer.component":9,"./modal.header.component":10}],8:[function(require,module,exports){
 (function() {
     angular.module('mcms.components')
         .directive('modalBody', modalBody);
@@ -18909,7 +18998,7 @@ require('./modal.header.component');
 
 })();
 
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 (function() {
     angular.module('mcms.components')
         .directive('modalFooter', modalFooter);
@@ -18931,7 +19020,7 @@ require('./modal.header.component');
 
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 (function() {
     angular.module('mcms.components')
         .directive('modalHeader', modalHeader);
@@ -18953,7 +19042,7 @@ require('./modal.header.component');
 
 })();
 
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 (function() {
     angular.module('mcms.components')
         .directive('scrollTo', scrollTo);
@@ -19019,7 +19108,247 @@ require('./modal.header.component');
 
 })();
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
+(function() {
+    angular.module('mcms.components')
+        .directive('sideBarNav', sideBarNav);
+
+    sideBarNav.$inject = ['configuration'];
+    sideBarNavController.$inject = ['mcms.menuService','$location'];
+
+    function sideBarNav(Config){
+
+        return {
+            require : 'sideBarNav',
+            templateUrl: Config.templatesDir + "Components/sideBarNav.component.html",
+            controller: sideBarNavController,
+            controllerAs : 'VM',
+            scope: {},
+            restrict : 'E',
+            link : function(scope, element, attrs, controllers){
+            }
+        };
+    }
+
+    function sideBarNavController(Menu,$location){
+        var vm = this;
+        vm.Menu = Menu.get();
+
+        vm.navigate = function(path){
+          $location.path(path);
+        };
+    }
+})();
+
+},{}],13:[function(require,module,exports){
+(function() {
+    angular.module('mcms.components')
+        .directive('thumbUploadBox', thumbUploadBox);
+
+    thumbUploadBox.$inject = ['$rootScope','configuration','$timeout'];
+    function thumbUploadBox($rootScope,Config,$timeout){
+
+        return {
+            require : 'ngModel',
+            templateUrl: Config.templatesDir  + "Components/thumbUploadBox.component.html",
+            scope: {
+                model : '=ngModel',
+                thumbModel : '=thumb',
+                options : '=?options'
+            },
+            restrict : 'EA',
+            link : function(scope, element, attrs, controllers){
+                var defaults  = {
+                    id : attrs.id || 'thumbUploadBox',
+                    uploadOptions : Config.fileTypes.image,
+                    uploadConfig : {
+                        url : Config.apiUrl + 'uploadThumb',
+                        fields : {}
+                    },
+                    onUploadDone : onUploadDone,
+                    onProgress : onProgress
+                },
+                    Uploader = {};
+
+                if (typeof scope.options == 'undefined'){
+                    scope.options = {};
+                }
+
+                Uploader = angular.extend(defaults,scope.options);
+
+                scope.id = Uploader.id;
+                scope.uploadOptions = Uploader.uploadOptions;
+                scope.uploadConfig = Uploader.uploadConfig;
+                scope.onUploadDone = Uploader.onUploadDone;
+                scope.onProgress = Uploader.onProgress;
+
+
+
+                function onUploadDone(file,response){//handle the after upload shit
+                    $timeout(function(){
+
+                      scope.model = (response.files) ? response.files[0].result :  response;
+                      scope.thumbModel = scope.model.copies.big_thumb.imageUrl;
+                      scope.f = null;
+                    },100);
+                }
+
+              function onProgress(file,progress){//handle the progress
+                $timeout(function(){
+                  scope.f = file;
+                });
+              }
+
+                $rootScope.$on('file.upload.added',function(e,files){
+                    scope.files = files;
+                });
+
+
+            }
+        };
+    }
+
+})();
+
+},{}],14:[function(require,module,exports){
+(function(){
+    'use strict';
+
+    angular.module('mcms.components')
+        .directive('uploadBox',['configuration', function (Config){
+            return {
+                require: "ngModel",
+                scope: {
+                    model : '=ngModel',
+                    config : '=?config',
+                    callback : '&?callback',
+                    onProgress : '&?onProgress'
+                },
+                templateUrl: Config.templatesDir + "Components/uploadBox.directive.html",
+                link: function(scope, element, attributes, ngModel) {
+                    scope.accept = attributes.accept || 'image/*,application/pdf';
+                    scope.acceptSelect = attributes.acceptSelect || 'image/*,audio/*,video/*';
+                    scope.imgagePreview = attributes.imagePreview || false;
+                    scope.progressBar = attributes.progressBar || false;
+                    scope.multiple = attributes.multiple || false;
+                    scope.autoStart = attributes.autoStart || false;
+                    scope.progressBarDuration = attributes.progressBarDuration || 5000;
+                    scope.id = attributes.id || Math.random(0,3000);
+                },
+                controller : uploadBoxController,
+                controllerAs : 'VM'
+            };
+        }]);
+
+    uploadBoxController.$inject = ['$scope','Upload','configuration','$timeout','lodashFactory','$rootScope'];
+
+    function uploadBoxController($scope,Upload,Config,$timeout,lo,$rootScope){
+        var vm = this,
+          fileList = [],
+            tmpObj = {
+                headers: {
+                    '_csrf': Config.CSRF || ''
+                },
+                method: 'POST',
+                file : '',
+                fileFormDataName: 'uploadedFile',
+                fields : {}
+            };//this directive expects a config object
+        tmpObj = lo.merge($scope.config,tmpObj);
+
+
+        $scope.$watch('files', function (files) {
+            $scope.formUpload = false;
+            if (files != null) {
+                $rootScope.$broadcast('file.upload.added',files);
+
+                if ($scope.autoStart){
+                    startUpload(files);
+                }
+            }
+        });
+
+        function startUpload(files){
+          if (!lo.isArray(files)){//single file
+
+            $scope.errorMsg = null;
+            upload(files);
+            return;
+          }
+
+            for (var i in files) {
+                $scope.errorMsg = null;
+              fileList.push(files[i]);
+
+              (function (file) {
+                upload(file);
+              })(files[i]);
+            }
+        }
+
+        $rootScope.$on('file.upload.startUpload',function(e,id,files){//new files added
+          if (id != $scope.id){
+            return;
+          }
+            startUpload(files)
+        });
+
+        function upload(file) {
+            vm.errorMsg = null;
+            uploadUsingUpload(file);
+        }
+
+        function uploadUsingUpload(file) {
+            var configObj = lo.clone(tmpObj);
+            configObj.fields._csrf = Config.CSRF;
+            configObj.file = file;
+            file.show = true;
+
+            file.upload = Upload.upload(configObj);
+
+            file.upload.then(function (response) {
+                $rootScope.$broadcast('file.upload.complete',$scope.id,file,response);
+
+                if (typeof $scope.callback == 'function'){
+                    $scope.callback.apply(this,[{file : file,response : response.data}]);
+                }
+
+                $timeout(function () {
+                    file.result = response.data;
+                });
+
+                $timeout(function(){
+                    file.show = false;
+                },$scope.progressBarDuration);
+
+            }, function (response) {
+                if (response.status > 0){
+                    $scope.errorMsg = response.status + ': ' + response.data;
+                }
+
+                $rootScope.$broadcast('file.upload.error' ,$scope.id,file,$scope.errorMsg);
+            });
+
+            file.upload.progress(function (evt) {
+                // Math.min is to fix IE which reports 200% sometimes
+                file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+
+                $rootScope.$broadcast('file.upload.progress',$scope.id,file,file.progress);
+
+              if (typeof $scope.onProgress == 'function'){
+                $scope.onProgress.apply(this,[{file : file,progress : file.progress}  ]);
+              }
+            });
+
+            file.upload.xhr(function (xhr) {
+                // xhr.upload.addEventListener('abort', function(){console.log('abort complete')}, false);
+            });
+        }
+
+    }
+})();
+
+},{}],15:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -19051,7 +19380,7 @@ require('./modal.header.component');
             };
         }]);
 })();
-},{}],10:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -19062,7 +19391,9 @@ require('./modal.header.component');
 
     var config = {
         apiUrl : '/api/',
+        prefixUrl : '/manage',
         templatesDir : appUrl + '/templates/',
+        imageUploadUrl: '/manage/uploadImage/',
         imageBasePath: assetsUrl + 'img',
         appUrl : appUrl,
         componentsUrl : componentsUrl,
@@ -19091,34 +19422,42 @@ require('./modal.header.component');
     core.constant('configuration',config);
 })();
 
-},{}],11:[function(require,module,exports){
-(function(){
+},{}],17:[function(require,module,exports){
+(function () {
     'use strict';
     angular.module('mcms.core')
-      .filter('lo',lo)
-      .filter('moment', moment);
+        .filter('lo', lo)
+        .filter('moment', moment)
+        .filter('url', url);
 
     moment.$inject = ['momentFactory'];
     lo.$inject = ['lodashFactory'];
+    url.$inject = ['$filter','configuration'];
 
     function moment(Moment) {
         return function (date, format) {
             var defaults = {
-                format : "DD/MM/YYYY @ HH:mm"
+                format: "DD/MM/YYYY @ HH:mm"
             };
 
             return Moment(date).format(format || defaults.format);
         };
     }
 
-  function lo(lodash){
-    return function (method,params){
-      return lodash[method](params);
+    function lo(lodash) {
+        return function (method, params) {
+            return lodash[method](params);
+        }
     }
-  }
+
+    function url($filter,Config) {
+        return function (name, params) {
+            return Config.prefixUrl  + $filter('reverseUrl')(name,params);
+        }
+    }
 })();
 
-},{}],12:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 (function() {
     angular.module('mcms.core')
         .directive('lo', lo);
@@ -19151,7 +19490,7 @@ require('./modal.header.component');
 
 })();
 
-},{}],13:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 (function () {
   'use strict';
 
@@ -19168,14 +19507,24 @@ require('./modal.header.component');
   }
 })();
 
-},{"lodash":1,"moment":2}],14:[function(require,module,exports){
+},{"lodash":1,"moment":2}],20:[function(require,module,exports){
 (function () {
     'use strict';
     /*
      * Module used for core components like data services, lodash and common directives
      */
-    angular.module('mcms.core', []);
+    angular.module('mcms.core', [])
+        .run(run);
 
+    run.$inject = ['app.serviceProvider','mcms.menuService'];
+
+    function run(App,Menu) {
+        Menu.addMenu(Menu.newItem({
+            id : 'home',
+            title : 'Home',
+            permalink : ''
+        }));
+    }
 })();
 
 require('./services');
@@ -19188,274 +19537,250 @@ require('./core.alertMessage.directive');
 
 
 
-},{"./core.alertMessage.directive":9,"./core.config":10,"./core.filters":11,"./core.lo.directive":12,"./factories":13,"./serviceProvider":15,"./services":16}],15:[function(require,module,exports){
+},{"./core.alertMessage.directive":15,"./core.config":16,"./core.filters":17,"./core.lo.directive":18,"./factories":19,"./serviceProvider":21,"./services":22}],21:[function(require,module,exports){
 (function () {
     'use strict';
 
     angular.module('mcms.core')
-    .service('app.serviceProvider',Service);
+        .service('app.serviceProvider', Service);
 
-    Service.$inject = ['$rootScope','$q','$timeout'];
+    Service.$inject = ['$rootScope', '$q', '$timeout','$injector'];
 
-    function Service($rootScope,$q,$timeout){
-      var _this = this;
+    function Service($rootScope, $q, $timeout,$injector) {
+        var _this = this;
 
-      this.availableComponents = [];
-      this.registeredComponents = [];
-      this.queue = [];
+        this.availableComponents = [];
+        this.registeredComponents = [];
+        this.queue = [];
 
-      this.registerComponent = registerComponent;
-      this.componentIsLoaded = componentIsLoaded;
-      this.componentReady = componentReady;
-      this.checkStatus = checkStatus;
-      this.processQueue = processQueue;
-      this.processQ = processQ;
+        this.registerComponent = registerComponent;
+        this.componentIsLoaded = componentIsLoaded;
+        this.componentReady = componentReady;
+        this.checkStatus = checkStatus;
+        this.processQueue = processQueue;
+        this.processQ = processQ;
+        this.registerModules = registerModules;
+        this.registerModule = registerModule;
 
-      /**
-       * When all modules that need to be loaded before a route loads are done, we return true
-       * We only check for modules that have registered as "Need to load before route change"
-       * @returns {boolean}
+
+        /**
+         * When all modules that need to be loaded before a route loads are done, we return true
+         * We only check for modules that have registered as "Need to load before route change"
+         * @returns {boolean}
          */
-      this.appIsReady = function(){
-        if (_this.registeredComponents.length == _this.availableComponents.length){
-          return true;
-        }
-
-        return false;
-      };
-
-      /**
-       * check every 100ms if all of the modules are done loading.
-       * @returns {*}
-         */
-      function checkStatus(){
-        var deferred = $q.defer();
-        $timeout(function(){
-          check(function(res){
-            if (res){
-              $rootScope.$broadcast('app.components.loaded',true);
-              deferred.resolve(true);
+        this.appIsReady = function () {
+            if (_this.registeredComponents.length == _this.availableComponents.length) {
+                return true;
             }
-          });
 
-        });
+            return false;
+        };
 
-
-        return deferred.promise;
-      }
-
-      /**
-       * recursive check for modules loaded
-       * @param callback
+        /**
+         * check every 100ms if all of the modules are done loading.
+         * @returns {*}
          */
-      function check(callback){
-        $timeout(function(){
-          if (_this.appIsReady()){
-            return callback(true);
-          }
+        function checkStatus() {
+            var deferred = $q.defer();
+            $timeout(function () {
+                check(function (res) {
+                    if (res) {
+                        $rootScope.$broadcast('app.components.loaded', true);
+                        deferred.resolve(true);
+                    }
+                });
 
-          check(callback);
-          return callback(false);
-        },100);
-      }
+            });
 
-      /**
-       * Check if a specific module has loaded
-       * @param name
-       * @returns {boolean}
-         */
-      function componentIsLoaded(name){
-        return (_this.registeredComponents.indexOf(name) != -1);
-      }
 
-      /**
-       * Report a module as loaded.
-       * @param name
-       * @returns {Service}
-         */
-      function componentReady(name){
-        _this.registeredComponents.push(name);
-        //check if everything is ready
-        _this.appIsReady();
-        return _this;
-      }
-
-      /**
-       * Register a module as a "Need to load before route change"
-       * @param name
-       * @param func
-       * @returns {Service}
-         */
-      function registerComponent(name,func){
-        _this.availableComponents.push(name);
-        _this.queue.push({
-          name : name,
-          func : func
-        });
-        return _this;
-      }
-
-      function processQ() {
-        var deferred = $q.defer(),
-          asyncTasks = [];
-
-        for (var i in _this.queue){
-          asyncTasks.push(_this.queue[i].func());
+            return deferred.promise;
         }
 
-        return $q.all(asyncTasks);
+        /**
+         * recursive check for modules loaded
+         * @param callback
+         */
+        function check(callback) {
+            $timeout(function () {
+                if (_this.appIsReady()) {
+                    return callback(true);
+                }
 
-      }
-
-      function processQueue(){
-        var asyncTasks = {},
-          deferred = $q.defer();
-
-        for (var i in _this.queue){
-          asyncTasks[_this.queue[i].name] = _this.queue[i].func;
+                check(callback);
+                return callback(false);
+            }, 100);
         }
 
-        async.parallel(asyncTasks,function(err,results){
-          if (err){
-            return deferred.reject(err);
-          }
+        /**
+         * Check if a specific module has loaded
+         * @param name
+         * @returns {boolean}
+         */
+        function componentIsLoaded(name) {
+            return (_this.registeredComponents.indexOf(name) != -1);
+        }
 
-          deferred.resolve(results);
-        });
+        /**
+         * Report a module as loaded.
+         * @param name
+         * @returns {Service}
+         */
+        function componentReady(name) {
+            _this.registeredComponents.push(name);
+            //check if everything is ready
+            _this.appIsReady();
+            return _this;
+        }
 
-        return deferred.promise;
-      }
+        /**
+         * Register a module as a "Need to load before route change"
+         * @param name
+         * @param func
+         * @returns {Service}
+         */
+        function registerComponent(name, func) {
+            _this.availableComponents.push(name);
+            _this.queue.push({
+                name: name,
+                func: func
+            });
+            return _this;
+        }
+
+        function processQ() {
+            var deferred = $q.defer(),
+                asyncTasks = [];
+
+            for (var i in _this.queue) {
+                asyncTasks.push(_this.queue[i].func());
+            }
+
+            return $q.all(asyncTasks);
+
+        }
+
+        function processQueue() {
+            var asyncTasks = {},
+                deferred = $q.defer();
+
+            for (var i in _this.queue) {
+                asyncTasks[_this.queue[i].name] = _this.queue[i].func;
+            }
+
+            async.parallel(asyncTasks, function (err, results) {
+                if (err) {
+                    return deferred.reject(err);
+                }
+
+                deferred.resolve(results);
+            });
+
+            return deferred.promise;
+        }
+
+        function registerModules(Modules) {
+            console.log(Modules)
+
+        }
+
+        function registerModule(Module) {
+            console.log(Module)
+        }
     }
 
 })();
 
-},{}],16:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 (function () {
   'use strict';
 
   angular.module('mcms.core')
     .service('core.services', Service);
 
-  Service.$inject = ['toasty','SweetAlert'];
+  Service.$inject = [];
 
-  function Service(toasty,SweetAlert){
-
-    this.alert = function (title, text) {
-      SweetAlert.swal(title, text);
-    };
-
-    this.alertSuccess = function (title, text) {
-      SweetAlert.swal(title, text, 'success');
-    };
-
-    this.alertError = function (title, text) {
-      SweetAlert.swal(title, text, 'error');
-    };
-
-    this.alertWarning = function (title, text) {
-      SweetAlert.swal(title, text, 'warning');
-    };
-
-    this.alertInfo = function (title, text) {
-      SweetAlert.swal(title, text, 'info');
-    };
-
-    this.alertHtml = function (title, text) {
-      SweetAlert.swal({
-        html : true,
-        title : title,
-        text : text
-      });
-    };
-
-    this.confirm = function (title, text, successCb, cancelCb) {
-      var config = {
-        title: title,
-        text: text,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#DD6B55'
-      };
-      this._swal(config, successCb, cancelCb);
-    };
-
-    this._swal = function (config, successCb, cancelCb) {
-      SweetAlert.swal(config,
-        function (confirmed) {
-          if (confirmed) {
-            successCb();
-          } else {
-            cancelCb();
-          }
-        });
-    };
-
-    this.toastSuccess = function (title, text) {
-
-      toasty.success({
-        title: title,
-        msg: text,
-        sound: false
-      });
-    };
-
-    this.toastError = function (title, text) {
-      toasty.error({
-        title: title,
-        msg: text,
-        sound: false
-      });
-    };
-
-    this.toastWarning = function (title, text) {
-      toasty.warning({
-        title: title,
-        msg: text,
-        sound: false
-      });
-    };
-
-    this.toastInfo = function (title, text) {
-      toasty.info({
-        title: title,
-        msg: text,
-        sound: false
-      });
-    };
+  function Service(){
+      this.createFilterFor = createFilterFor;
   }
 
+    function createFilterFor(prop,query) {
+        var lowercaseQuery = angular.lowercase(query);
+
+        return function filterFn(item) {
+            var regex = new RegExp(lowercaseQuery, 'gi' );
+
+            return item[prop].match(regex);
+        };
+    }
 })();
 
-},{}],17:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function() {
     'use strict';
 
     angular.module('mcms.dashBoard')
         .controller('DashBoardController',Controller);
 
-    function Controller() {
+    Controller.$inject = ['mcms.widgetService'];
+
+    function Controller(Widget) {
+        var vm = this;
+
+        var widgets = [
+            Widget.newWidget(
+                {
+                    title: 'Clock Widget',
+                    template: ' <header-component></header-component>',
+                    settings: {
+                        sizeX: 3,
+                        sizeY: 3
+                    }
+                }
+            ),
+            Widget.newWidget(
+                {
+                    title: 'Clock Widget',
+                    template: ' <header-component></header-component>',
+                    settings: {
+                        sizeX: 3,
+                        sizeY: 3
+                    }
+                }
+            )
+        ];
+        Widget.registerWidgets(widgets);
+
+        vm.widgets = Widget.get();
+        vm.topDirections = ['left', 'up'];
+        vm.bottomDirections = ['down', 'right'];
+        vm.availableModes = ['md-fling', 'md-scale'];
+        vm.availableDirections = ['up', 'down', 'left', 'right'];
+        vm.isOpen = false;
+        vm.selectedDirection = 'up';
+        vm.selectedMode = vm.availableModes[1];
 
     }
 
 })();
-},{}],18:[function(require,module,exports){
+
+},{}],24:[function(require,module,exports){
 (function() {
   'use strict';
 
   angular.module('mcms.dashBoard', []);
-
 })();
 
 require('./routes');
 require('./DashBoardController');
-},{"./DashBoardController":17,"./routes":19}],19:[function(require,module,exports){
+
+},{"./DashBoardController":23,"./routes":25}],25:[function(require,module,exports){
 (function() {
     'use strict';
 
     angular.module('mcms.dashBoard');
 
 })();
-},{}],20:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function () {
     'use strict';
 
@@ -19477,16 +19802,202 @@ require('./DashBoardController');
     }
 
 })();
-},{}],21:[function(require,module,exports){
+
+require('./services');
+
+},{"./services":27}],27:[function(require,module,exports){
+(function () {
+    'use strict';
+
+    angular.module('mcms.menu')
+        .service('mcms.menuService',Service);
+    //We need to be able to $inject a new module to the main.
+    //Also, we need to be able to register routes?
+    function Service() {
+        var _this = this;
+        this.Menu = [];
+
+        this.addMenu = addMenu;
+        this.addMenuItem = addMenuItem;
+        this.addNode = addNode;
+        this.render = render;
+        this.newItem = newItem;
+        this.get = get;
+
+        function get() {
+            return _this.Menu;
+        }
+
+        function addMenu(menu) {
+            _this.Menu.push(menu);
+        }
+
+        function addMenuItem(item) {
+
+        }
+
+        function addNode(node) {
+
+        }
+
+        function render() {
+
+        }
+
+        //Top level item
+        function newItem(item) {
+            var menu = new MenuTemplate();
+            menu.ancestors.push('root');
+            return angular.extend(menu,item);
+        }
+
+        function MenuTemplate() {
+            var _that = this;
+            this.template = {
+                id : '',
+                title : '',
+                permalink : '',
+                parent : 'root',
+                ancestors : [],
+                children : [],
+                depth : 0,
+                addChild : addChild,
+                addChildren : addChildren
+            };
+
+            function addChild (child,parent) {
+                var temp = new MenuTemplate();
+                parent = parent || this;
+
+                temp.parent = parent.id;
+                temp.ancestors = angular.copy(parent.ancestors);
+                temp.ancestors.push(parent.id);
+                _that.template.children.push(angular.extend(temp,child));
+
+                return this;
+            }
+
+            function addChildren(items) {
+                var parent = this;
+                items.forEach(function (item) {
+                    addChild(item,parent);
+                });
+
+                return this;
+            }
+
+            return this.template;
+        }
+    }
+})();
+
+},{}],28:[function(require,module,exports){
+(function () {
+    'use strict';
+
+    angular.module('mcms.widgets', []);
+})();
+
+
+require('./services');
+require('./widgetProvider');
+
+
+
+},{"./services":29,"./widgetProvider":30}],29:[function(require,module,exports){
+(function () {
+    'use strict';
+
+    angular.module('mcms.widgets')
+        .service('mcms.widgetService', Service);
+
+    Service.$inject = [];
+
+    function Service() {
+        var _this = this;
+        this.widgets = [];
+        var template = {
+            id : '',
+            title : '',
+            template : '',
+            settings : {}
+        };
+
+        this.get = get;
+        this.newWidget = newWidget;
+        this.registerWidget = registerWidget;
+        this.registerWidgets = registerWidgets;
+
+        function get() {
+            return _this.widgets;
+        }
+
+        function newWidget(widget) {
+            return angular.extend(angular.copy(template),widget);
+        }
+
+        function registerWidget(widget){
+            _this.widgets.push(widget);
+            return _this;
+        }
+
+        function registerWidgets(widgets){
+
+            for (var i in widgets){
+                registerWidget(widgets[i]);
+            }
+
+            return _this;
+        }
+
+    }//End constructor
+
+
+})();
+
+},{}],30:[function(require,module,exports){
+(function() {
+    angular.module('mcms.core')
+        .directive('widgetProvider', widgetProvider);
+
+    widgetProvider.$inject = ['configuration','$compile'];
+    widgetProviderController.$inject = ['mcms.menuService','$location'];
+
+    function widgetProvider(Config,$compile){
+
+        return {
+            require : 'widgetProvider',
+            controller: widgetProviderController,
+            controllerAs : 'VM',
+            scope: {
+                item : '=item'
+            },
+            restrict : 'E',
+            link : function(scope, element, attrs, controllers){
+                var newEl = angular.element(scope.item.template);
+                element.append(newEl);
+                $compile(newEl)(scope);
+            }
+        };
+    }
+
+    function widgetProviderController(Menu,$location){
+        var vm = this;
+
+    }
+})();
+
+},{}],31:[function(require,module,exports){
 (function(){
     'use strict';
-    
+
     var angularModules = [
         'ngSanitize',
         'ngRoute',
         'ngResource',
         'ngFileUpload',
         'angular-reverse-url',
+        'angular-redactor',
         'ngMessages',
         'ngMaterial',
         'ngAnimate',
@@ -19495,8 +20006,13 @@ require('./DashBoardController');
         'mcms.core',
         'mcms.components',
         'mcms.dashBoard',
+        'mcms.widgets',
         'mcms.menu'
     ];
+
+    if (typeof Injectables != 'undefined'){
+        angularModules = angularModules.concat(Injectables);
+    }
 
     angular.module('mcms', angularModules)
         .config(config)
@@ -19506,15 +20022,103 @@ require('./DashBoardController');
     config.$inject = ['$compileProvider','$routeProvider', '$locationProvider','$mdThemingProvider'];
 
     function startUp(){
+
         //Boot stuff here
     }
 
     function config($compileProvider,$routeProvider, $locationProvider,$mdThemingProvider){
         $compileProvider.debugInfoEnabled(true);
         $locationProvider.html5Mode(false);
+        var customPrimary = {
+            '50': '#eea9a3',
+            '100': '#eb958d',
+            '200': '#e78178',
+            '300': '#e36c62',
+            '400': '#df584d',
+            '500': '#db4437',
+            '600': '#d33426',
+            '700': '#bd2e22',
+            '800': '#a7291e',
+            '900': '#92241a',
+            'A100': '#f2bdb9',
+            'A200': '#f6d1ce',
+            'A400': '#fae6e4',
+            'A700': '#7c1e16'
+        };
+        $mdThemingProvider
+            .definePalette('customPrimary',
+                customPrimary);
+
+        var customAccent = {
+            '50': '#f4c5c1',
+            '100': '#f0b1ab',
+            '200': '#ec9c96',
+            '300': '#e88880',
+            '400': '#e4746b',
+            '500': '#e06055',
+            '600': '#dc4c3f',
+            '700': '#d8382a',
+            '800': '#c53124',
+            '900': '#af2b20',
+            'A100': '#f8d9d6',
+            'A200': '#fcedec',
+            'A400': '#ffffff',
+            'A700': '#99261c'
+        };
+        $mdThemingProvider
+            .definePalette('customAccent',
+                customAccent);
+
+        var customWarn = {
+            '50': '#ffb280',
+            '100': '#ffa266',
+            '200': '#ff934d',
+            '300': '#ff8333',
+            '400': '#ff741a',
+            '500': '#ff6400',
+            '600': '#e65a00',
+            '700': '#cc5000',
+            '800': '#b34600',
+            '900': '#993c00',
+            'A100': '#ffc199',
+            'A200': '#ffd1b3',
+            'A400': '#ffe0cc',
+            'A700': '#803200'
+        };
+        $mdThemingProvider
+            .definePalette('customWarn',
+                customWarn);
+
+        var customBackground = {
+            '50': '#ffffff',
+            '100': '#ffffff',
+            '200': '#ffffff',
+            '300': '#ffffff',
+            '400': '#fbfbfb',
+            '500': '#eeeeee',
+            '600': '#e1e1e1',
+            '700': '#d4d4d4',
+            '800': '#c8c8c8',
+            '900': '#bbbbbb',
+            'A100': '#ffffff',
+            'A200': '#ffffff',
+            'A400': '#ffffff',
+            'A700': '#aeaeae'
+        };
+        $mdThemingProvider
+            .definePalette('customBackground',
+                customBackground);
+
         $mdThemingProvider.theme('default')
-            .primaryPalette('deep-orange')
-            .accentPalette('red');
+            .primaryPalette('customPrimary')
+            .accentPalette('customAccent')
+            .warnPalette('customWarn')
+            .backgroundPalette('customBackground');
+
+        $mdThemingProvider.theme('customTheme')
+            .primaryPalette('grey')
+            .accentPalette('green')
+            .warnPalette('red');
     }
 
 })();
@@ -19522,4 +20126,6 @@ require('./Core');
 require('./Components');
 require('./Menu');
 require('./DashBoard');
-},{"./Components":3,"./Core":14,"./DashBoard":18,"./Menu":20}]},{},[21]);
+require('./Widgets');
+
+},{"./Components":6,"./Core":20,"./DashBoard":24,"./Menu":26,"./Widgets":28}]},{},[31]);

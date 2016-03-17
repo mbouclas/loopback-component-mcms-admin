@@ -1,0 +1,10 @@
+<md-list>
+<md-list-item ng-repeat="item in VM.Menu" ng-click="VM.navigate(item.permalink)">
+    <p>{{ item.title }}</p>
+    <md-list ng-if="item.children.length > 0">
+    <md-list-item ng-repeat="child in item.children" ng-click="VM.navigate(child.permalink)">
+        <p>{{ child.title }}</p>
+    </md-list-item>
+    </md-list>
+</md-list-item>
+</md-list>

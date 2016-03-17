@@ -1,0 +1,30 @@
+<div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles"
+     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+     class="drop-box" ngf-multiple="{{ multiple }}" ngf-allow-dir="true"
+     ngf-accept="accept" accept="{{ acceptSelect }}"
+     ngf-drop-available="dropAvailable">
+    <div ng-hide="dropAvailable">File Drop not available</div>
+
+    <md-button class="md-raised md-primary">
+        <md-icon class="material-icons">file_upload</md-icon>
+        Click to select
+    </md-button>
+</div>
+
+<div class="preview" ng-show="files.length > 0">
+<img ngf-src="files" ngf-default-src="/assets/img/no-image.png" ngf-accept="accept" ng-if="imgagePreview">
+    <ul class="list-unstyled" ng-if="progressBar">
+        <li class="sel-file" ng-repeat="file in files" ng-show="file.show">
+            <md-progress-linear md-mode="determinate" value="{{file.progress}}"></md-progress-linear>
+          <br>
+          {{file.name}} - size: {{file.size}}B - type: {{file.type}}
+        </li>
+
+        </ul>
+
+    <ul style="clear:both" ng-show="rejFiles.length > 0" class="response">
+        <li class="sel-file" ng-repeat="file in rejFiles">
+            Rejected file: {{file.name}} - size: {{file.size}}B - type: {{file.type}}
+        </li>
+    </ul>
+</div>

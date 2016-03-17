@@ -1,0 +1,15 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-menu-bar>
+            <md-menu ng-repeat="item in VM.Menu">
+                <button ng-click="$mdOpenMenu()">
+                    {{ item.title }}
+                </button>
+                <md-menu-content>
+
+                </md-menu-content>
+                </md-menu>
+            </md-menu-bar>
+
+    </div>
+</md-toolbar>

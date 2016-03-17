@@ -1,4 +1,5 @@
 global._ = require('lodash');
+global.jQuery = global['$'] = require('jquery');
 require('angular');
 require('angular-route');
 require('angular-sanitize');
@@ -9,4 +10,6 @@ require('angular-aria');
 require('angular-material');
 require('ng-file-upload');
 require('../assets/bower_components/angular-reverse-url/src/reverse_url');
+require('../assets/js/redactor/redactor.build');
+require('../assets/bower_components/angular-redactor/angular-redactor');
 require('../assets/js/lbService');

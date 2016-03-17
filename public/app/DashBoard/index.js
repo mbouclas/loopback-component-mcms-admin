@@ -2,7 +2,6 @@
   'use strict';
 
   angular.module('mcms.dashBoard', []);
-
 })();
 
 require('./routes');

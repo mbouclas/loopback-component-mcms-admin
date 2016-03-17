@@ -11,7 +11,8 @@ module.exports = (function (App, Package, privateMethods) {
         //add them to the index via an array
         var allFiles = {
             css: [],
-            scripts: []
+            scripts: [],
+            injectables : []
         }, packages = [];
 
         Package.registeredModules.forEach(function (item) {
@@ -22,6 +23,11 @@ module.exports = (function (App, Package, privateMethods) {
 
             allFiles.scripts = iterateFiles(item.files.js, item);
             allFiles.css = iterateFiles(item.files.css, item);
+            if (item.modules){
+                for (var i in item.modules){
+                    allFiles.injectables.push(item.modules[i]);
+                }
+            }
 
         });
         return allFiles;

@@ -24,5 +24,7 @@ require('./core.lo.directive');
 require('./serviceProvider');
 require('./core.filters');
 require('./core.alertMessage.directive');
+require('./toSlug.directive');
+require('./tabSelector');
 
 

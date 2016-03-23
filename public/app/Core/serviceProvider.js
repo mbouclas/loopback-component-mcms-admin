@@ -99,6 +99,7 @@
          * @returns {Service}
          */
         function registerComponent(name, func) {
+
             _this.availableComponents.push(name);
             _this.queue.push({
                 name: name,
@@ -116,7 +117,6 @@
             }
 
             return $q.all(asyncTasks);
-
         }
 
         function processQueue() {

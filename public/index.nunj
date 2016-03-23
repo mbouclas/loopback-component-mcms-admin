@@ -7,6 +7,7 @@
     <meta name="viewport" content="initial-scale=1" />
     <link rel="stylesheet" href="/assets/js/redactor/redactor.css">
     <link rel="stylesheet" href="/assets/css/angular-material.min.css">
+    <link rel="stylesheet" href="/assets/css/md-data-table.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
     <link rel="stylesheet" href="/assets/css/styles.css"/>
@@ -18,18 +19,8 @@
 {% raw %}
 
 <div layout="row" flex="">
-    <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')"
-                md-disable-backdrop="" md-whiteframe="4">
+    <side-bar-nav></side-bar-nav>
 
-        <md-toolbar class="md-theme-indigo">
-            <h1 class="md-toolbar-tools">Sidenav Left</h1>
-        </md-toolbar>
-
-        <md-content flex role="navigation">
-            <side-bar-nav></side-bar-nav>
-        </md-content>
-
-    </md-sidenav>
     <md-content flex="">
         <header-component></header-component>
         <div layout="column" layout-fill="" layout-align="top">

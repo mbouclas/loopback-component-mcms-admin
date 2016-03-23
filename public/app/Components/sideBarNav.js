@@ -3,7 +3,7 @@
         .directive('sideBarNav', sideBarNav);
 
     sideBarNav.$inject = ['configuration'];
-    sideBarNavController.$inject = ['mcms.menuService','$location'];
+    sideBarNavController.$inject = ['mcms.menuService','$location','$mdSidenav'];
 
     function sideBarNav(Config){
 
@@ -19,9 +19,15 @@
         };
     }
 
-    function sideBarNavController(Menu,$location){
+    function sideBarNavController(Menu,$location,$mdSidenav){
         var vm = this;
         vm.Menu = Menu.get();
+
+        vm.toggleSideNav = function () {
+            $mdSidenav('left').close().then(function () {
+                console.log('done')
+            });
+        };
 
         vm.navigate = function(path){
           $location.path(path);

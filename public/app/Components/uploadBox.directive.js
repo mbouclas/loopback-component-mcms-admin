@@ -27,9 +27,9 @@
             };
         }]);
 
-    uploadBoxController.$inject = ['$scope','Upload','configuration','$timeout','lodashFactory','$rootScope'];
+    uploadBoxController.$inject = ['$scope','Upload','configuration','$timeout','lodashFactory','$rootScope','asyncFactory'];
 
-    function uploadBoxController($scope,Upload,Config,$timeout,lo,$rootScope){
+    function uploadBoxController($scope,Upload,Config,$timeout,lo,$rootScope,async){
         var vm = this,
           fileList = [],
             tmpObj = {
@@ -63,14 +63,29 @@
             return;
           }
 
+            var asyncTasks = [];
             for (var i in files) {
+                $scope.errorMsg = null;
+                fileList.push(files[i]);
+                asyncTasks.push(upload.bind(null,files[i]));
+            }
+
+            async.series(asyncTasks,function (err,results) {
+               if (err){
+                   console.log(err);
+               }
+
+                console.log(results);
+            });
+/*            for (var i in files) {
                 $scope.errorMsg = null;
               fileList.push(files[i]);
 
+
               (function (file) {
-                upload(file);
-              })(files[i]);
-            }
+                    upload(file);
+                })(files[i]);
+            }*/
         }
 
         $rootScope.$on('file.upload.startUpload',function(e,id,files){//new files added
@@ -80,12 +95,12 @@
             startUpload(files)
         });
 
-        function upload(file) {
+        function upload(file,callback) {
             vm.errorMsg = null;
-            uploadUsingUpload(file);
+            uploadUsingUpload(file,callback);
         }
 
-        function uploadUsingUpload(file) {
+        function uploadUsingUpload(file,callback) {
             var configObj = lo.clone(tmpObj);
             configObj.fields._csrf = Config.CSRF;
             configObj.file = file;
@@ -106,6 +121,9 @@
 
                 $timeout(function(){
                     file.show = false;
+                    if (typeof callback !='undefined' && typeof callback == 'function'){
+                        callback(null,response.data);
+                    }
                 },$scope.progressBarDuration);
 
             }, function (response) {

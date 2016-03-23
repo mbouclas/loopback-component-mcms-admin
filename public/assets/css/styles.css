@@ -94,3 +94,11 @@ md-list-item ._md-list-item-inner > ._md-list-item-inner > p {
     padding-top: 25px;
     margin: 10px;
 }
+
+
+*[sv-handle]{
+    cursor: move;
+}
+
+*[md-cell] .md-chips {
+    font-size:12px;}

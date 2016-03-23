@@ -33,7 +33,6 @@
 
     function startUp(){
 
-        //Boot stuff here
     }
 
     function config($compileProvider,$routeProvider, $locationProvider,$mdThemingProvider){

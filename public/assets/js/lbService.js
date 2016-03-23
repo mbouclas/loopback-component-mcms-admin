@@ -6667,6 +6667,45 @@ module.factory(
 
         /**
          * @ngdoc method
+         * @name mcms.lbService.Product#saveItem
+         * @methodOf mcms.lbService.Product
+         *
+         * @description
+         *
+         * Similar to /save but with full workout
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `result` – `{object=}` - 
+         */
+        "saveItem": {
+          url: urlBase + "/products/saveItem",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
          * @name mcms.lbService.Product#paginate
          * @methodOf mcms.lbService.Product
          *

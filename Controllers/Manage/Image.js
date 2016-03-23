@@ -1,31 +1,30 @@
-module.exports = (function(App,Package){
+module.exports = (function (App, Package) {
     var packageName = Package.name,
         lo = require('lodash'),
         Promise = require('bluebird'),
         path = require('path');
 
     return {
-        name : 'Image',
-        nameSpace : 'Manage',
-        uploadImage : uploadImage
+        name: 'Image',
+        nameSpace: 'Manage',
+        uploadImage: uploadImage
     };
 
-    function uploadImage(req,res,next){
+    function uploadImage(req, res, next) {
         var asyncTasks = [],
-            uploadService =  App.Services['mcmsNodeImageUploads'].Image,
-            config = App.Config.image[req.body.container];
+            uploadService = App.Services['mcmsNodeImageUploads'].Image,
+            config = lo.clone(App.Config.image[req.body.container]);
 
-        for (var i in req.files){
-           asyncTasks.push(
-               uploadService.handleUpload(req.files[i],
-               config,
-               JSON.parse(req.body.item))
-           );
-        }
+        uploadService.handleUpload(req.files[0],
+            config,
+            req.body.item)
+            .then(function (result) {
+                res.send(result);
+                config = null;
+                result = null;
+            });
 
-        Promise.all(asyncTasks).then(function (results) {
-            res.send(results[0]);
-        });
+
 
     }
 

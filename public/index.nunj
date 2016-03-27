@@ -19,7 +19,6 @@
 {% raw %}
 
 <div layout="row" flex="">
-    <side-bar-nav></side-bar-nav>
 
     <md-content flex="">
         <header-component></header-component>

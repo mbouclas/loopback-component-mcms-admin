@@ -1,12 +1,17 @@
-<md-toolbar>
+<md-toolbar style="background-color: #c62828">
     <div class="md-toolbar-tools">
         <md-menu-bar>
             <md-menu ng-repeat="item in VM.Menu">
-                <button ng-click="$mdOpenMenu()">
+                <button ng-click="$mdOpenMenu()" class="md-button md-hue-2 md-primary md-raised">
                     {{ item.title }}
                 </button>
                 <md-menu-content>
-
+                    <md-menu-item>
+                        <md-button href="/manage#/{{ item.permalink }}">Home</md-button>
+                    </md-menu-item>
+                    <md-menu-item ng-repeat="child in item.children">
+                        <md-button href="/manage#/{{ child.permalink }}">{{ child.title }}</md-button>
+                    </md-menu-item>
                 </md-menu-content>
                 </md-menu>
             </md-menu-bar>

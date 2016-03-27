@@ -21030,6 +21030,7 @@ require('./modal.header.component');
     angular.module('mcms.core')
         .filter('lo', lo)
         .filter('moment', moment)
+        .filter('urlEncode', urlEncode)
         .filter('url', url);
 
     moment.$inject = ['momentFactory'];
@@ -21055,6 +21056,19 @@ require('./modal.header.component');
     function url($filter,Config) {
         return function (name, params) {
             return Config.prefixUrl  + $filter('reverseUrl')(name,params);
+        }
+    }
+
+    function urlEncode() {
+        return function (data) {
+            if (!data){
+                return '';
+            }
+            if (typeof data === 'object'){
+                data = angular.toJson(data);
+            }
+
+            return window.encodeURIComponent(data);
         }
     }
 })();
@@ -21439,31 +21453,7 @@ require('./tabSelector');
 
     function Controller(Widget) {
         var vm = this;
-
-        var widgets = [
-            Widget.newWidget(
-                {
-                    title: 'Clock Widget',
-                    template: ' <header-component></header-component>',
-                    settings: {
-                        sizeX: 3,
-                        sizeY: 3
-                    }
-                }
-            ),
-            Widget.newWidget(
-                {
-                    title: 'Clock Widget',
-                    template: ' <header-component></header-component>',
-                    settings: {
-                        sizeX: 3,
-                        sizeY: 3
-                    }
-                }
-            )
-        ];
-        Widget.registerWidgets(widgets);
-
+        
         vm.widgets = Widget.get();
         vm.topDirections = ['left', 'up'];
         vm.bottomDirections = ['down', 'right'];
@@ -21684,12 +21674,21 @@ require('./widgetProvider');
             controller: widgetProviderController,
             controllerAs : 'VM',
             scope: {
-                item : '=item'
+                item : '=item',
+                appendTo : '=?appendTo'
             },
             restrict : 'E',
             link : function(scope, element, attrs, controllers){
+
                 var newEl = angular.element(scope.item.template);
-                element.append(newEl);
+
+                if (scope.appendTo){
+                    var appendTo = $(scope.appendTo);
+                    appendTo.append(newEl);
+                } else {
+                    element.append(newEl);
+                }
+
                 $compile(newEl)(scope);
             }
         };

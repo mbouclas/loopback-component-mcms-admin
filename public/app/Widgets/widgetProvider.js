@@ -12,12 +12,21 @@
             controller: widgetProviderController,
             controllerAs : 'VM',
             scope: {
-                item : '=item'
+                item : '=item',
+                appendTo : '=?appendTo'
             },
             restrict : 'E',
             link : function(scope, element, attrs, controllers){
+
                 var newEl = angular.element(scope.item.template);
-                element.append(newEl);
+
+                if (scope.appendTo){
+                    var appendTo = $(scope.appendTo);
+                    appendTo.append(newEl);
+                } else {
+                    element.append(newEl);
+                }
+
                 $compile(newEl)(scope);
             }
         };

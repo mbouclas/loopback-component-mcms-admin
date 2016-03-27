@@ -1,48 +1,13 @@
 <h1>Dashboard</h1>
-<md-list flex>
-    <md-subheader class="md-no-sticky">3 line item</md-subheader>
-    <md-list-item class="md-3-line noright" ng-click="goToPerson(person.name, $event)">
-        <div class="md-list-item-text" layout="column">
-            <h3><a href="#/ss">{{ item.who }}111</a></h3>
-            <h4>{{ item.what }}222</h4>
-            <p>{{ item.notes }}333</p>
-        </div>
-        <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
-        <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
+    <widget-provider ng-repeat="widget in VM.widgets" item="widget"
+    append-to="($index%2)?'#right':'#left'"></widget-provider>
+<md-content layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column" id="left">
 
-        <md-divider ng-if="!$last"></md-divider>
-        <md-divider></md-divider>
-    </md-list-item>
-    <md-list-item class="md-3-line noright" ng-click="goToPerson(person.name, $event)">
-        <div class="md-list-item-text" layout="column">
-            <h3><a href="#/ss">{{ item.who }}111</a></h3>
-            <h4>{{ item.what }}222</h4>
-            <p>{{ item.notes }}333</p>
-        </div>
-        <md-fab-speed-dial md-open="VM.isOpen" md-direction="{{VM.selectedDirection}}" class="md-scale">
-            <md-fab-trigger>
-                <md-button aria-label="menu" class="md-fab md-warn">
-                    <md-icon md-svg-src="img/icons/menu.svg"></md-icon>
-                </md-button>
-            </md-fab-trigger>
+    </div>
 
-            <md-fab-actions>
-                <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-                    <md-icon md-svg-src="img/icons/twitter.svg" aria-label="Twitter"></md-icon>
-                </md-button>
-                <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                    <md-icon md-svg-src="img/icons/facebook.svg" aria-label="Facebook"></md-icon>
-                </md-button>
-                <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-                    <md-icon md-svg-src="img/icons/hangout.svg" aria-label="Google Hangout"></md-icon>
-                </md-button>
-            </md-fab-actions>
-        </md-fab-speed-dial>
-        <md-checkbox class="md-secondary" ng-model="topping.wanted"></md-checkbox>
-        <md-icon md-svg-icon="communication:email"  ng-click="doSecondaryAction($event)" aria-label="Send Email" class="md-secondary md-hue-3" ></md-icon>
-        <md-divider ng-if="!$last"></md-divider>
-        <md-divider></md-divider>
-    </md-list-item>
-    <md-divider ></md-divider>
-</md-list>
-<widget-provider ng-repeat="widget in VM.widgets" item="widget"></widget-provider>
+    <div flex-xs flex-gt-xs="50" layout="column" id="right">
+
+    </div>
+</md-content>
+

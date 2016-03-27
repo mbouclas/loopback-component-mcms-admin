@@ -3,6 +3,7 @@
     angular.module('mcms.core')
         .filter('lo', lo)
         .filter('moment', moment)
+        .filter('urlEncode', urlEncode)
         .filter('url', url);
 
     moment.$inject = ['momentFactory'];
@@ -28,6 +29,19 @@
     function url($filter,Config) {
         return function (name, params) {
             return Config.prefixUrl  + $filter('reverseUrl')(name,params);
+        }
+    }
+
+    function urlEncode() {
+        return function (data) {
+            if (!data){
+                return '';
+            }
+            if (typeof data === 'object'){
+                data = angular.toJson(data);
+            }
+
+            return window.encodeURIComponent(data);
         }
     }
 })();

@@ -8,31 +8,7 @@
 
     function Controller(Widget) {
         var vm = this;
-
-        var widgets = [
-            Widget.newWidget(
-                {
-                    title: 'Clock Widget',
-                    template: ' <header-component></header-component>',
-                    settings: {
-                        sizeX: 3,
-                        sizeY: 3
-                    }
-                }
-            ),
-            Widget.newWidget(
-                {
-                    title: 'Clock Widget',
-                    template: ' <header-component></header-component>',
-                    settings: {
-                        sizeX: 3,
-                        sizeY: 3
-                    }
-                }
-            )
-        ];
-        Widget.registerWidgets(widgets);
-
+        
         vm.widgets = Widget.get();
         vm.topDirections = ['left', 'up'];
         vm.bottomDirections = ['down', 'right'];

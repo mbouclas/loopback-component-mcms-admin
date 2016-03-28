@@ -41,7 +41,8 @@
     "watch": "watchify ./public/app/index.js -o ./public/assets/js/components.js -v",
     "watch-app": "watchify ./public/app/app.js -o ./public/assets/js/app.js -v",
     "create-loopback": "cd ../../server && lb-ng -m mcms.lbService server.js ../node_modules/loopback-component-mcms-admin/public/assets/js/lbService.js",
-    "minify-app": "uglifyjs public/assets/js/app.js --compress --mangle -o public/assets/js/app.min.js"
+    "minify-app": "uglifyjs public/assets/js/app.js --compress --mangle -o public/assets/js/app.min.js",
+    "minify-components": "uglifyjs public/assets/js/components.js --compress --mangle -o public/assets/js/components.min.js"
   },
   "devDependencies": {},
   "homepage": "https://github.com/mbouclas/loopback-component-mcms-admin",

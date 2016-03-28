@@ -37,7 +37,7 @@
 <script>
     var Injectables = {{ files.injectables |safe }};
 </script>
-<script src="/assets/js/components.js"></script>
+<script src="/assets/js/components{% if env == 'production' %}.min{% endif %}.js"></script>
 <script src="/assets/js/app.js"></script>
 
 {% for script in files.scripts %}

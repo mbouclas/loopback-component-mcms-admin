@@ -22,6 +22,7 @@ module.exports = function (App, Package) {
         var toInject = Package.Services.Admin.processModules();
         toInject.injectables = JSON.stringify(toInject.injectables);
         res.send(nunjucks.render('index.nunj', {
+            env : App.get('env'),
             siteName: Package.options.siteName || App.Config.app.siteName || 'MCMS Admin',
             files: toInject || {}
         }));

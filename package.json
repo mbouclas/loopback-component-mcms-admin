@@ -1,6 +1,6 @@
 {
   "name": "loopback-component-mcms-admin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Admin interface for Loopback based Mcms",
   "main": "index.js",
   "keywords": [
@@ -38,11 +38,11 @@
     "wrench": "^1.5.8"
   },
   "scripts": {
-    "watch": "watchify ./public/app/index.js -o ./public/assets/js/components.js -v",
-    "watch-app": "watchify ./public/app/app.js -o ./public/assets/js/app.js -v",
+    "watch": "watchify ./public/app/index.js -o ./public/assets/js/admin.components.js -v",
+    "watch-app": "watchify ./public/app/app.js -o ./public/assets/js/admin.app.js -v",
     "create-loopback": "cd ../../server && lb-ng -m mcms.lbService server.js ../node_modules/loopback-component-mcms-admin/public/assets/js/lbService.js",
-    "minify-app": "uglifyjs public/assets/js/app.js --compress --mangle -o public/assets/js/app.min.js",
-    "minify-components": "uglifyjs public/assets/js/components.js --compress --mangle -o public/assets/js/components.min.js"
+    "minify-app": "uglifyjs public/assets/js/app.js --compress --mangle -o public/assets/js/admin.app.min.js",
+    "minify-components": "uglifyjs public/assets/js/components.js --compress --mangle -o public/assets/js/admin.components.min.js"
   },
   "devDependencies": {},
   "homepage": "https://github.com/mbouclas/loopback-component-mcms-admin",

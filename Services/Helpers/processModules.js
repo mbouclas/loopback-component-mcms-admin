@@ -21,8 +21,8 @@ module.exports = (function (App, Package, privateMethods) {
                 return;
             }
 
-            allFiles.scripts = iterateFiles(item.files.js, item);
-            allFiles.css = iterateFiles(item.files.css, item);
+            allFiles.scripts = allFiles.scripts.concat(iterateFiles(item.files.js, item));
+            allFiles.css = allFiles.css.concat(iterateFiles(item.files.css, item));
             if (item.modules){
                 for (var i in item.modules){
                     allFiles.injectables.push(item.modules[i]);
@@ -30,6 +30,7 @@ module.exports = (function (App, Package, privateMethods) {
             }
 
         });
+
         return allFiles;
 
         function iterateFiles(files, item) {
@@ -47,6 +48,7 @@ module.exports = (function (App, Package, privateMethods) {
                 }
 
             }
+
             return found;
         }
 

@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/assets/css/md-data-table.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
-    <link rel="stylesheet" href="/assets/css/styles.css"/>
+    <link rel="stylesheet" href="/assets/css/admin.styles.css"/>
     {% for style in files.css %}
         <link rel="stylesheet" href="{{ style }}"/>
     {% endfor %}
@@ -37,8 +37,9 @@
 <script>
     var Injectables = {{ files.injectables |safe }};
 </script>
-<script src="/assets/js/components{% if env == 'production' %}.min{% endif %}.js"></script>
-<script src="/assets/js/app.js"></script>
+
+<script src="/assets/js/admin.components{% if env == 'production' %}.min{% endif %}.js"></script>
+<script src="/assets/js/admin.app.js"></script>
 
 {% for script in files.scripts %}
     <script src="{{ script }}"></script>

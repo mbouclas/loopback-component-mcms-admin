@@ -102,3 +102,11 @@ md-list-item ._md-list-item-inner > ._md-list-item-inner > p {
 
 *[md-cell] .md-chips {
     font-size:12px;}
+
+.tree-node {
+    border: 1px solid #dfdfdf;
+    color: #555;
+    background-color: #f3f3f3;
+    margin:5px;
+    padding:5px;
+}

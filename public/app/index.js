@@ -11,6 +11,7 @@ require('angular-material');
 require('ng-file-upload');
 require('angular-sortable-view/src/angular-sortable-view.min');
 require('angular-material-data-table/dist/md-data-table.min');
+require('angular-ui-tree/dist/angular-ui-tree.js');
 require('../assets/bower_components/angular-reverse-url/src/reverse_url');
 require('../assets/js/redactor/redactor.build');
 require('../assets/bower_components/angular-redactor/angular-redactor');

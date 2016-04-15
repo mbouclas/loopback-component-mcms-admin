@@ -17,7 +17,8 @@
         'mcms.components',
         'mcms.dashBoard',
         'mcms.widgets',
-        'mcms.menu'
+        'mcms.menu',
+        'mcms.settingsManager'
     ];
 
     if (typeof Injectables != 'undefined'){
@@ -50,3 +51,4 @@ require('./Components');
 require('./Menu');
 require('./DashBoard');
 require('./Widgets');
+require('./SettingsManager');

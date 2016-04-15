@@ -21329,6 +21329,7 @@ require('./tabSelector');
 
   function Service(){
       this.createFilterFor = createFilterFor;
+      this.flattenTree = flattenTree;
   }
 
     function createFilterFor(prop,query) {
@@ -21339,6 +21340,42 @@ require('./tabSelector');
 
             return item[prop].match(regex);
         };
+    }
+
+    function flattenTree(nodes, level, parent, flat) {
+        if (!flat) {
+            flat = [];
+        }
+
+        if (!level) {
+            level = 0;
+        }
+
+        if (typeof parent == 'undefined') {
+            parent = null;
+        }
+
+        for (var i in nodes) {
+            nodes[i].ancestors = [];
+
+            if (parent) {
+                nodes[i].parent = parent.id;
+
+                for (var j in parent.ancestors) {
+                    nodes[i].ancestors.push(parent.ancestors[j]);
+                }
+                nodes[i].ancestors.push(parent.id);
+                nodes[i].orderBy = i;
+            }
+
+            flat.push(nodes[i]);
+
+            if (nodes[i].children) {
+                flattenTree(nodes[i].children, level + 1, nodes[i], flat);
+            }
+        }
+
+        return flat;
     }
 })();
 
@@ -21599,6 +21636,172 @@ require('./services');
 (function () {
     'use strict';
 
+    angular.module('mcms.settingsManager', [])
+        .config(config);
+
+    config.$inject = ['$routeProvider','configuration'];
+
+    function config($routeProvider,Config) {
+/*        $routeProvider
+            .when('/settings', {
+                templateUrl: Config.templatesDir + 'dashboard.html',
+                controller: 'DashBoardController',
+                controllerAs: 'VM',
+                name: 'home'
+            })
+            .otherwise('/');*/
+
+    }
+
+})();
+
+require('./services');
+require('./renderSettings.component');
+
+},{"./renderSettings.component":35,"./services":36}],35:[function(require,module,exports){
+(function () {
+    angular.module('mcms.settingsManager')
+        .directive('renderSettings', Directive);
+
+    Directive.$inject = ['configuration'];
+    DirectiveController.$inject = ['$scope', 'mcms.settingsManagerService', 'lodashFactory','$timeout'];
+
+    function Directive(Config) {
+
+        return {
+            require : ['ngModel','renderSettings'],
+            templateUrl: Config.templatesDir + "SettingsManager/renderSettings.component.html",
+            controller: DirectiveController,
+            controllerAs: 'VM',
+            scope: {
+                options: '=?options',
+                items: '=items',
+                model : '=ngModel'
+            },
+            restrict: 'E',
+            link: function (scope, element, attrs, controllers) {
+                var defaults = {
+                    limit: 10
+                };
+
+                scope.options = (!scope.options) ? defaults : angular.extend(defaults, scope.options);
+                scope.$watch('items',function (val) {
+                    if (!val){
+                        return;
+                    }
+                    controllers[1].assignItems(scope.items,scope.model);
+
+                },true);
+
+            }
+        };
+    }
+
+    function DirectiveController($scope, Settings, lo, $timeout) {
+        var vm = this;
+        vm.Items = [];
+
+
+        vm.assignItems = function(items,ngModel){
+            if (lo.isArray(items)){
+                //direct assignment
+                vm.Items = items;
+            } else if (lo.isObject(items)){
+                //search first
+                vm.Items = Settings.get(items);
+            }
+            //now merge items with the given ngModel
+
+/*            for (var i in vm.Items){
+                if (ngModel[vm.Items[i].varName]){
+                    vm.Items[i].value = ngModel[vm.Items[i].varName];
+                }
+
+                ngModel[vm.Items[i].varName] = vm.Items[i].value;
+
+            }*/
+
+
+        };
+
+        vm.changed = function (field) {
+            $timeout(function () {
+                $scope.model[field.varName] = field.value;
+            });
+        }
+    }
+})();
+
+},{}],36:[function(require,module,exports){
+(function () {
+    'use strict';
+
+    angular.module('mcms.settingsManager')
+        .service('mcms.settingsManagerService',Service);
+
+    Service.$inject = ['lodashFactory'];
+
+    function Service(lo) {
+        var _this = this;
+        var Settings = [];
+        this.types = [
+                'text',
+                'textArea',
+                'select',
+                'boolean',
+                'image',
+                'file'
+            ];
+
+        this.addSettings = addSettings;
+        this.addSettingsItem = addSettingsItem;
+        this.newItem = newItem;
+        this.all = all;
+        this.get = get;
+
+
+        function all() {
+            return Settings;
+        }
+
+        function get(where) {
+            return lo.filter(Settings,where);
+        }
+
+        function addSettings(settings) {
+            for (var i in settings){
+                _this.addSettingsItem(settings[i]);
+            }
+
+            return _this;
+        }
+
+        function addSettingsItem(item) {
+            Settings.push(item);
+            return _this;
+        }
+
+        function newItem(item) {
+            var template = angular.copy({
+                module : '',
+                component : '',
+                varName : '',
+                title : '',
+                type : '',
+                orderBy : 0,
+                options : []
+            });
+
+            return angular.extend(template,item);
+        }
+
+    }
+})();
+
+},{}],37:[function(require,module,exports){
+(function () {
+    'use strict';
+
     angular.module('mcms.widgets', []);
 })();
 
@@ -21608,7 +21811,7 @@ require('./widgetProvider');
 
 
 
-},{"./services":35,"./widgetProvider":36}],35:[function(require,module,exports){
+},{"./services":38,"./widgetProvider":39}],38:[function(require,module,exports){
 (function () {
     'use strict';
 
@@ -21659,7 +21862,7 @@ require('./widgetProvider');
 
 })();
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 (function() {
     angular.module('mcms.core')
         .directive('widgetProvider', widgetProvider);
@@ -21700,7 +21903,7 @@ require('./widgetProvider');
     }
 })();
 
-},{}],37:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
 (function(){
     'use strict';
 
@@ -21720,7 +21923,8 @@ require('./widgetProvider');
         'mcms.components',
         'mcms.dashBoard',
         'mcms.widgets',
-        'mcms.menu'
+        'mcms.menu',
+        'mcms.settingsManager'
     ];
 
     if (typeof Injectables != 'undefined'){
@@ -21753,5 +21957,6 @@ require('./Components');
 require('./Menu');
 require('./DashBoard');
 require('./Widgets');
+require('./SettingsManager');
 
-},{"./Components":10,"./Core":24,"./DashBoard":30,"./Menu":32,"./Widgets":34}]},{},[37]);
+},{"./Components":10,"./Core":24,"./DashBoard":30,"./Menu":32,"./SettingsManager":34,"./Widgets":37}]},{},[40]);

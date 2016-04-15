@@ -1,0 +1,18 @@
+<div ng-repeat="field in VM.Items">
+
+    <md-input-container class="md-block" flex-gt-sm ng-if="field.type=='text'">
+        <label>{{ field.title }}</label>
+        <input ng-model="field.value" ng-change="VM.changed(field)">
+    </md-input-container>
+
+    <md-switch ng-model="field.value" aria-label="{{ field.title }}" ng-if="field.type=='boolean'" ng-change="VM.changed(field)">
+        {{ field.title }}
+    </md-switch>
+
+    <md-input-container class="md-block" flex-gt-sm ng-if="field.type=='multiselect'">
+        <label>{{ field.title }}</label>
+        <md-select ng-model="field.value" aria-label="{{ field.title }}" placeholder="{{ field.title }}" ng-change="VM.changed(field)">
+            <md-option ng-value="item.varName" ng-repeat="item in field.options">{{ item.title }}</md-option>
+        </md-select>
+    </md-input-container>
+</div>

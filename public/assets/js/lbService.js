@@ -8156,6 +8156,193 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.ProductCategory#asTree
+         * @methodOf mcms.lbService.ProductCategory
+         *
+         * @description
+         *
+         * Returns a tree for this model
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `parent` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `ProductCategory` object.)
+         * </em>
+         */
+        "asTree": {
+          url: urlBase + "/categories/asTree",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.ProductCategory#addNode
+         * @methodOf mcms.lbService.ProductCategory
+         *
+         * @description
+         *
+         * Add a node to the tree model
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `parent` – `{object}` - 
+         *
+         *  - `node` – `{object}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `ProductCategory` object.)
+         * </em>
+         */
+        "addNode": {
+          url: urlBase + "/categories/addNode",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.ProductCategory#moveNode
+         * @methodOf mcms.lbService.ProductCategory
+         *
+         * @description
+         *
+         * Move a tree node
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `node` – `{object}` - 
+         *
+         *  - `parent` – `{object}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `ProductCategory` object.)
+         * </em>
+         */
+        "moveNode": {
+          url: urlBase + "/categories/moveNode",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.ProductCategory#deleteNode
+         * @methodOf mcms.lbService.ProductCategory
+         *
+         * @description
+         *
+         * Delete a tree node
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `node` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `ProductCategory` object.)
+         * </em>
+         */
+        "deleteNode": {
+          url: urlBase + "/categories/deleteNode",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.ProductCategory#saveJsonTree
+         * @methodOf mcms.lbService.ProductCategory
+         *
+         * @description
+         *
+         * Save a json tree
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `tree` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `ProductCategory` object.)
+         * </em>
+         */
+        "saveJsonTree": {
+          url: urlBase + "/categories/saveJsonTree",
+          method: "POST"
+        },
+
         // INTERNAL. Use Product.Categories.findById() instead.
         "::findById::Product::Categories": {
           params: {
@@ -9004,6 +9191,85 @@ module.factory(
       { 'id': '@id' },
       {
 
+        // INTERNAL. Use Page.Categories.findById() instead.
+        "prototype$__findById__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Page.Categories.destroyById() instead.
+        "prototype$__destroyById__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.updateById() instead.
+        "prototype$__updateById__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Page.Categories.link() instead.
+        "prototype$__link__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Page.Categories.unlink() instead.
+        "prototype$__unlink__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.exists() instead.
+        "prototype$__exists__Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Page.Categories() instead.
+        "prototype$__get__Categories": {
+          isArray: true,
+          url: urlBase + "/pages/:id/Categories",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Page.Categories.create() instead.
+        "prototype$__create__Categories": {
+          url: urlBase + "/pages/:id/Categories",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Page.Categories.destroyAll() instead.
+        "prototype$__delete__Categories": {
+          url: urlBase + "/pages/:id/Categories",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.count() instead.
+        "prototype$__count__Categories": {
+          url: urlBase + "/pages/:id/Categories/count",
+          method: "GET"
+        },
+
         /**
          * @ngdoc method
          * @name mcms.lbService.Page#create
@@ -9428,16 +9694,16 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name mcms.lbService.Page#getOne
+         * @name mcms.lbService.Page#search
          * @methodOf mcms.lbService.Page
          *
          * @description
          *
-         * Find one page based via the permalink
+         * Generic search in the model
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `permalink` – `{string=}` - 
+         *  - `q` – `{string=}` - 
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -9451,11 +9717,158 @@ module.factory(
          *
          * Data properties:
          *
-         *  - `page` – `{object=}` - 
+         *  - `results` – `{object=}` - 
+         */
+        "search": {
+          url: urlBase + "/pages/search",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page#findAll
+         * @methodOf mcms.lbService.Page
+         *
+         * @description
+         *
+         * Similar to /get but with the full workout in the background
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `results` – `{object=}` - 
+         */
+        "findAll": {
+          url: urlBase + "/pages/findAll",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page#getOne
+         * @methodOf mcms.lbService.Page
+         *
+         * @description
+         *
+         * Similar to /findOne but with full workout
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `results` – `{object=}` - 
          */
         "getOne": {
           url: urlBase + "/pages/getOne",
           method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page#saveItem
+         * @methodOf mcms.lbService.Page
+         *
+         * @description
+         *
+         * Similar to /save but with full workout
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `req` – `{object=}` - 
+         *
+         *  - `res` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `result` – `{object=}` - 
+         */
+        "saveItem": {
+          url: urlBase + "/pages/saveItem",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page#paginate
+         * @methodOf mcms.lbService.Page
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Page` object.)
+         * </em>
+         */
+        "paginate": {
+          url: urlBase + "/pages/paginate",
+          method: "POST"
         },
       }
     );
@@ -9599,6 +10012,416 @@ module.factory(
     */
     R.modelName = "Page";
 
+    /**
+     * @ngdoc object
+     * @name mcms.lbService.Page.Categories
+     * @header mcms.lbService.Page.Categories
+     * @object
+     * @description
+     *
+     * The object `Page.Categories` groups methods
+     * manipulating `PageCategory` instances related to `Page`.
+     *
+     * Call {@link mcms.lbService.Page#Categories Page.Categories()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page#Categories
+         * @methodOf mcms.lbService.Page
+         *
+         * @description
+         *
+         * Queries Categories of Page.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::get::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#count
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Counts Categories of Page.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.Categories.count = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::count::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#create
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Creates a new instance in Categories of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.create = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::create::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#createMany
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Creates a new instance in Categories of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.createMany = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::createMany::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#destroyAll
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Deletes all Categories of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Categories.destroyAll = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::delete::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#destroyById
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Delete a related item by id for Categories.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Categories.destroyById = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::destroyById::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#exists
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Check the existence of Categories relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.exists = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::exists::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#findById
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Find a related item by id for Categories.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.findById = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::findById::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#link
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Add a related item by id for Categories.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.link = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::link::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#unlink
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Remove the Categories relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.Categories.unlink = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::unlink::Page::Categories"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Page.Categories#updateById
+         * @methodOf mcms.lbService.Page.Categories
+         *
+         * @description
+         *
+         * Update a related item by id for Categories.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for Categories
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R.Categories.updateById = function() {
+          var TargetResource = $injector.get("PageCategory");
+          var action = TargetResource["::updateById::Page::Categories"];
+          return action.apply(R, arguments);
+        };
 
     return R;
   }]);
@@ -11233,6 +12056,193 @@ module.factory(
           url: urlBase + "/trees/change-stream",
           method: "POST"
         },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Tree#asTree
+         * @methodOf mcms.lbService.Tree
+         *
+         * @description
+         *
+         * Returns a tree for this model
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `parent` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tree` object.)
+         * </em>
+         */
+        "asTree": {
+          url: urlBase + "/trees/asTree",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Tree#addNode
+         * @methodOf mcms.lbService.Tree
+         *
+         * @description
+         *
+         * Add a node to the tree model
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `parent` – `{object}` - 
+         *
+         *  - `node` – `{object}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tree` object.)
+         * </em>
+         */
+        "addNode": {
+          url: urlBase + "/trees/addNode",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Tree#moveNode
+         * @methodOf mcms.lbService.Tree
+         *
+         * @description
+         *
+         * Move a tree node
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `node` – `{object}` - 
+         *
+         *  - `parent` – `{object}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tree` object.)
+         * </em>
+         */
+        "moveNode": {
+          url: urlBase + "/trees/moveNode",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Tree#deleteNode
+         * @methodOf mcms.lbService.Tree
+         *
+         * @description
+         *
+         * Delete a tree node
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `node` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tree` object.)
+         * </em>
+         */
+        "deleteNode": {
+          url: urlBase + "/trees/deleteNode",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.Tree#saveJsonTree
+         * @methodOf mcms.lbService.Tree
+         *
+         * @description
+         *
+         * Save a json tree
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `tree` – `{object}` - 
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method does not accept any data. Supply an empty object.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Tree` object.)
+         * </em>
+         */
+        "saveJsonTree": {
+          url: urlBase + "/trees/saveJsonTree",
+          method: "POST"
+        },
       }
     );
 
@@ -11374,6 +12384,684 @@ module.factory(
     * i.e. `Tree`.
     */
     R.modelName = "Tree";
+
+
+    return R;
+  }]);
+
+/**
+ * @ngdoc object
+ * @name mcms.lbService.PageCategory
+ * @header mcms.lbService.PageCategory
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `PageCategory` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+module.factory(
+  "PageCategory",
+  ['LoopBackResource', 'LoopBackAuth', '$injector', function(Resource, LoopBackAuth, $injector) {
+    var R = Resource(
+      urlBase + "/pageCategories/:id",
+      { 'id': '@id' },
+      {
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#create
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "create": {
+          url: urlBase + "/pageCategories",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#createMany
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Create a new instance of the model and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "createMany": {
+          isArray: true,
+          url: urlBase + "/pageCategories",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#upsert
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "upsert": {
+          url: urlBase + "/pageCategories",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#exists
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Check whether a model instance exists in the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `exists` – `{boolean=}` - 
+         */
+        "exists": {
+          url: urlBase + "/pageCategories/:id/exists",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#findById
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Find a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         *  - `filter` – `{object=}` - Filter defining fields and include
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "findById": {
+          url: urlBase + "/pageCategories/:id",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#find
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Find all instances of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "find": {
+          isArray: true,
+          url: urlBase + "/pageCategories",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#findOne
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Find first instance of the model matched by filter from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "findOne": {
+          url: urlBase + "/pageCategories/findOne",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#updateAll
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        "updateAll": {
+          url: urlBase + "/pageCategories/update",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#deleteById
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "deleteById": {
+          url: urlBase + "/pageCategories/:id",
+          method: "DELETE"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#count
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Count instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        "count": {
+          url: urlBase + "/pageCategories/count",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#prototype$updateAttributes
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Update attributes for a model instance and persist it into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        "prototype$updateAttributes": {
+          url: urlBase + "/pageCategories/:id",
+          method: "PUT"
+        },
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#createChangeStream
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Create a change stream.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         *  - `options` – `{object=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `changes` – `{ReadableStream=}` - 
+         */
+        "createChangeStream": {
+          url: urlBase + "/pageCategories/change-stream",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Page.Categories.findById() instead.
+        "::findById::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Page.Categories.destroyById() instead.
+        "::destroyById::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.updateById() instead.
+        "::updateById::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Page.Categories.link() instead.
+        "::link::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Page.Categories.unlink() instead.
+        "::unlink::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.exists() instead.
+        "::exists::Page::Categories": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/pages/:id/Categories/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Page.Categories() instead.
+        "::get::Page::Categories": {
+          isArray: true,
+          url: urlBase + "/pages/:id/Categories",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Page.Categories.create() instead.
+        "::create::Page::Categories": {
+          url: urlBase + "/pages/:id/Categories",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Page.Categories.createMany() instead.
+        "::createMany::Page::Categories": {
+          isArray: true,
+          url: urlBase + "/pages/:id/Categories",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Page.Categories.destroyAll() instead.
+        "::delete::Page::Categories": {
+          url: urlBase + "/pages/:id/Categories",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Page.Categories.count() instead.
+        "::count::Page::Categories": {
+          url: urlBase + "/pages/:id/Categories/count",
+          method: "GET"
+        },
+      }
+    );
+
+
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#updateOrCreate
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Update an existing model instance or insert a new one into the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *   This method does not accept any parameters.
+         *   Supply an empty object or omit this argument altogether.
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R["updateOrCreate"] = R["upsert"];
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#update
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Update instances of the model matched by where from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * The number of instances updated
+         */
+        R["update"] = R["updateAll"];
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#destroyById
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R["destroyById"] = R["deleteById"];
+
+        /**
+         * @ngdoc method
+         * @name mcms.lbService.PageCategory#removeById
+         * @methodOf mcms.lbService.PageCategory
+         *
+         * @description
+         *
+         * Delete a model instance by id from the data source.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - Model id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `PageCategory` object.)
+         * </em>
+         */
+        R["removeById"] = R["deleteById"];
+
+
+    /**
+    * @ngdoc property
+    * @name mcms.lbService.PageCategory#modelName
+    * @propertyOf mcms.lbService.PageCategory
+    * @description
+    * The name of the model represented by this $resource,
+    * i.e. `PageCategory`.
+    */
+    R.modelName = "PageCategory";
 
 
     return R;
